@@ -1,6 +1,8 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
+
 
 
 # BMI Calculator 💪
 
 
+![](../ScreenShots/BMICalc1.png)
+![](../ScreenShots/BMICalc2.png)
