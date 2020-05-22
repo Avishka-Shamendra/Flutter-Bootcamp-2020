@@ -4,5 +4,5 @@
 # BMI Calculator 💪
 
 
-![](../ScreenShots/BMICalc1.png)
-![](../ScreenShots/BMICalc2.png)
+![](../Screenshots/BMICalc1.png)
+![](../Screenshots/BMICalc2.png)
