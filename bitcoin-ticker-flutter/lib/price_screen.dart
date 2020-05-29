@@ -1,9 +1,12 @@
+import 'package:bitcoin_ticker/widgets/displayCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
 import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
+  PriceScreen(this.coinData);
+  CoinData coinData;
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
@@ -11,8 +14,10 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
   List<String> currencyList = currenciesList;
+  var coinValues = {};
+  bool isWaiting = false;
 
-  DropdownButton androidDropDwon(List<String> currencyList) {
+  DropdownButton androidDropDown(List<String> currencyList) {
     List<DropdownMenuItem> items = [];
     for (String currency in currencyList) {
       items.add(
@@ -28,6 +33,7 @@ class _PriceScreenState extends State<PriceScreen> {
         onChanged: (value) {
           setState(() {
             selectedCurrency = value;
+            getData(); //pass the selected new currency
           });
         });
   }
@@ -43,10 +49,33 @@ class _PriceScreenState extends State<PriceScreen> {
       backgroundColor: Colors.lightBlue,
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
+        setState(() {
+          selectedCurrency = currencyList[selectedIndex];
+          getData();
+        });
       },
       children: items,
     );
+  }
+
+  void getData() async {
+    isWaiting = true;
+    try {
+      var data = await widget.coinData.getCoinData(selectedCurrency);
+      isWaiting = false;
+      print(data);
+      setState(() {
+        coinValues = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
@@ -59,25 +88,18 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = ? USD',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: ListView.builder(
+                  itemCount: cryptoList.length,
+                  itemBuilder: (context, index) {
+                    return DisplayCard(
+                        cryptoCurrency: cryptoList[index],
+                        rate:
+                            (isWaiting) ? null : coinValues[cryptoList[index]],
+                        selectedCurrency: selectedCurrency);
+                  }),
             ),
           ),
           Container(
@@ -87,7 +109,7 @@ class _PriceScreenState extends State<PriceScreen> {
             color: Colors.lightBlue,
             child: Platform.isIOS
                 ? iosPicker(currencyList)
-                : androidDropDwon(currencyList),
+                : androidDropDown(currencyList),
           ),
         ],
       ),
