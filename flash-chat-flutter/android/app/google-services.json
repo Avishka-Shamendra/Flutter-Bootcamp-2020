@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "169846849684",
+    "firebase_url": "https://flash-chat-8b4ab.firebaseio.com",
+    "project_id": "flash-chat-8b4ab",
+    "storage_bucket": "flash-chat-8b4ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169846849684:android:a8ec6f93d69edbf14db481",
+        "android_client_info": {
+          "package_name": "com.avishka.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169846849684-p4bd42uav04ahk5ksn26b3lvdd0q6om7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ515XJ0tkIR7-fZRvUQfuNIcvnpR3Z1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169846849684-p4bd42uav04ahk5ksn26b3lvdd0q6om7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
