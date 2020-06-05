@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoeyflutter/constnats.dart';
+import 'package:todoeyflutter/models/taskData.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String newTask;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,23 +35,13 @@ class AddTaskScreen extends StatelessWidget {
                 height: 10,
               ),
               TextField(
+                onChanged: (value) {
+                  newTask = value;
+                },
                 textAlign: TextAlign.center,
                 autofocus: true,
                 style: TextStyle(fontSize: 22.5),
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.lightBlueAccent,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.lightBlueAccent,
-                      width: 3,
-                    ),
-                  ),
-                ),
+                decoration: kTextFieldDecoration,
               ),
               SizedBox(
                 height: 10,
@@ -50,7 +49,13 @@ class AddTaskScreen extends StatelessWidget {
               FlatButton(
                   padding: EdgeInsets.all(10.0),
                   color: Colors.lightBlueAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (newTask != null) {
+                      Provider.of<TaskData>(context, listen: false)
+                          .addTask(newTask);
+                    }
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Add',
                     style: TextStyle(color: Colors.white, fontSize: 20),

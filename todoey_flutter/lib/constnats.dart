@@ -7,3 +7,18 @@ const kContainerDecoration = BoxDecoration(
     topRight: Radius.circular(30),
   ),
 );
+
+const kTextFieldDecoration = InputDecoration(
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.lightBlueAccent,
+      width: 1,
+    ),
+  ),
+  focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.lightBlueAccent,
+      width: 3,
+    ),
+  ),
+);

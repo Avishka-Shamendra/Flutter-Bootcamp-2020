@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TaskTile extends StatelessWidget {
-  TaskTile({this.task, this.isChecked, this.onChanged});
+  TaskTile({this.task, this.isChecked, this.onChanged, this.onLongPress});
   final String task;
   final bool isChecked;
   final Function onChanged;
+  final Function onLongPress;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -19,6 +20,7 @@ class TaskTile extends StatelessWidget {
         activeColor: Colors.lightBlueAccent,
         onChanged: onChanged,
       ),
+      onLongPress: onLongPress,
     );
   }
 }

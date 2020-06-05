@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoeyflutter/constnats.dart';
-import 'package:todoeyflutter/models/task.dart';
+import 'package:todoeyflutter/models/taskData.dart';
 import 'package:todoeyflutter/screens/addTaskScreen.dart';
 import 'package:todoeyflutter/widgets/taskList.dart';
 
 class TasksScreen extends StatelessWidget {
-  List<Task> todos = [Task(task: 'study'), Task(task: 'go shopping')];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,7 @@ class TasksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).getTodoCount()} Tasks',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -55,7 +54,7 @@ class TasksScreen extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               decoration: kContainerDecoration,
-              child: TaskList(taskList: todos),
+              child: TaskList(),
             ),
           ),
         ],
