@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todoeyflutter/constnats.dart';
+import 'package:todoeyflutter/models/task.dart';
 import 'package:todoeyflutter/screens/addTaskScreen.dart';
 import 'package:todoeyflutter/widgets/taskList.dart';
 
 class TasksScreen extends StatelessWidget {
-  List<String> todos = ['study', 'eat cake', 'go to sleep'];
+  List<Task> todos = [Task(task: 'study'), Task(task: 'go shopping')];
 
   @override
   Widget build(BuildContext context) {
